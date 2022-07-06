@@ -17,19 +17,21 @@
     </div>
     <div id="flow-grid">
         <div id="card-container">
-            <p>Book 1</p>
-            <p>Book 2</p>
-            <p>Book 3</p>
-            <p>Book 4</p>
-            <p>Book 1</p>
-            <p>Book 2</p>
-            <p>Book 3</p>
-            <p>Book 4</p>
-            <p>Book 4</p>
         </div>
     </div>
-    <div id="user-controls">
-        <input type="button" value="Add Book">
-    </div>
+    <footer id="user-controls">
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title">
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author">
+            <label for="pages"># of Pages:</label>
+            <input type="text" name="pages" id="pages">
+            <label for="readStatus">Read Status:</label>
+            <input type="checkbox" name="readStatus" id="readStatus">
+            <br>
+            <input type="button" value="Add Book" id="addBook">
+        </form>
+    </footer>
 </body>
 </html>
