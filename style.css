@@ -34,3 +34,16 @@ body {
 p {
     border: 1px solid green;
 }
+
+.missing-info {
+    border: 2px solid red;
+    position: relative;
+    animation: shake .1s linear;
+    animation-iteration-count: 3;
+    outline: none;
+}
+
+.missing-info::after {
+    content: "<- Missing/Invalid Info";
+    color: red;
+}
