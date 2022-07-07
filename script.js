@@ -1,28 +1,30 @@
+// Pre-initialized books. This is the library
 let myLibrary = [
     {
         title: 'The Hobbit',
         author: 'J.R.R. Tokien',
         pages: 295,
-        readStatus: 'not read yet'
+        readStatus: 'Not read'
     },
     {
         title: 'The Bible',
         author: 'God',
         pages: 2000,
-        readStatus: 'has been read'
+        readStatus: 'Read'
     }
 ];
 
 
+// Book object creator
 function Book(title, author, pages, readStatus){
     this.title = title;
     this.author = author;
     this.pages = pages;
 
     if (readStatus){
-        this.readStatus = 'has been read';
+        this.readStatus = 'Read';
     } else {
-        this.readStatus = 'not read yet';
+        this.readStatus = 'Not read';
     }
 
     this.info = function(){
@@ -34,13 +36,42 @@ function Book(title, author, pages, readStatus){
 function addBookToLibrary(title, author, pages, readStatus){
     const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
-    let cardContainer = document.getElementById('card-container');
-    
-    let newEntry = document.createElement('p');
-    let text = document.createTextNode(`${newBook.title} by ${newBook.author}, ${newBook.pages} pages, ${newBook.readStatus}`);
-    newEntry.appendChild(text);
+
+    // Get/make main containers
+    const cardContainer = document.getElementById('card-container');
+    const newEntry = document.createElement('li');
+    const div = document.createElement('div');
+
+    // Create paragraph elements and text for each info
+    const newTitle = document.createElement('p');
+    newTitle.textContent = `${newBook.title}`;
+    newTitle.classList.add('title');
+
+    const newAuthor = document.createElement('p');
+    newAuthor.textContent = `by ${newBook.author}`;
+    newAuthor.classList.add('author');
+
+    const newPages = document.createElement('p');
+    newPages.textContent = `${newBook.pages} pages`;
+    newPages.classList.add('pages');
+
+    const newReadStatus = document.createElement('p');
+    newReadStatus.textContent = `${newBook.readStatus}`;
+    newReadStatus.classList.add('readStatus');
+
+    // Append what has been made
+    div.appendChild(newTitle);
+    div.appendChild(newAuthor);
+    div.appendChild(newPages);
+    div.appendChild(newReadStatus);
+    newEntry.appendChild(div);
+
+    // Apply class styling
+    newEntry.classList.add('col-sm-6');
+    newEntry.classList.add('gx-5');
     cardContainer.appendChild(newEntry);
 
+    // Clear input fields
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('pages').value = '';
@@ -49,13 +80,16 @@ function addBookToLibrary(title, author, pages, readStatus){
 
 
 function verifyFields(){
+    // Get DOM elements
     let title = document.getElementById('title');
     let author = document.getElementById('author');
     let pages = document.getElementById('pages');
     let readStatus = document.getElementById('readStatus').checked;
 
+    // Set flag to false for check at the end
     errorFlag = false;
 
+    // Check that title contains any string
     if (!title.value){
         title.classList.add("missing-info");
         errorFlag = true;
@@ -63,6 +97,8 @@ function verifyFields(){
     else {
         title.classList.remove("missing-info");
     }
+
+    // Check that author contains any string
     if (!author.value){
         author.classList.add("missing-info");
         errorFlag = true;
@@ -70,6 +106,8 @@ function verifyFields(){
     else {
         author.classList.remove("missing-info");
     }
+
+    // Check that pages contains an integer
     if (!pages.value || !Number.isInteger(Number(pages.value))){
         pages.classList.add("missing-info");
         errorFlag = true;
@@ -78,6 +116,7 @@ function verifyFields(){
         pages.classList.remove("missing-info");
     }
 
+    // If no errors from the above, add the book to our library
     if (!errorFlag){
         addBookToLibrary(title.value, author.value, pages.value, readStatus);
     }
@@ -85,19 +124,51 @@ function verifyFields(){
 }
 
 
+// Start by appending all books already present in the library
 function appendAllBooks(){
-    let cardContainer = document.getElementById("card-container");
+    // Get the main container element
+    const cardContainer = document.getElementById("card-container");
+
+    // Loop through each book in the library
     myLibrary.forEach ((book) => {
-        let newBook = document.createElement("p");
-        let text = document.createTextNode(`${book.title} by ${book.author}, ${book.pages} pages, ${book.readStatus}`);
-        newBook.appendChild(text);
+        // Create container elements
+        const newBook = document.createElement("li");
+        const div = document.createElement('div');
+
+        // Create paragraph elements and text for each info
+        const newTitle = document.createElement('p');
+        newTitle.textContent = `${book.title}`
+        newTitle.classList.add("title");
+
+        const newAuthor = document.createElement('p');
+        newAuthor.textContent = `by ${book.author}`;
+        newAuthor.classList.add("author");
+
+        const newPages = document.createElement('p');
+        newPages.textContent = `${book.pages} pages`;
+        newPages.classList.add("pages");
+
+        const newReadStatus = document.createElement('p');
+        newReadStatus.textContent = `${book.readStatus}`;
+        newReadStatus.classList.add("readStatus");
+
+        // Append text elements to the card
+        newBook.appendChild(newTitle);
+        newBook.appendChild(newAuthor);
+        newBook.appendChild(newPages);
+        newBook.appendChild(newReadStatus);
+
+        // Add classes for styling
+        newBook.classList.add("col-sm-6");
+        newBook.classList.add("gx-5");
         cardContainer.appendChild(newBook);
     });
 }
 
 
-
+// Add event listener to the "Add Book" button in the footer
 let addBookButton = document.getElementById('addBook');
 addBookButton.addEventListener("click", verifyFields);
 
+// On window load, append all books in the library
 window.onload = appendAllBooks;
