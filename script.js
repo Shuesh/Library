@@ -34,8 +34,17 @@ function Book(title, author, pages, readStatus){
 function addBookToLibrary(title, author, pages, readStatus){
     const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
-    document.getElementById('card-container').innerHTML = '';
-    appendAllBooks();
+    let cardContainer = document.getElementById('card-container');
+    
+    let newEntry = document.createElement('p');
+    let text = document.createTextNode(`${newBook.title} by ${newBook.author}, ${newBook.pages} pages, ${newBook.readStatus}`);
+    newEntry.appendChild(text);
+    cardContainer.appendChild(newEntry);
+
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('pages').value = '';
+    document.getElementById('readStatus').checked = false;
 }
 
 
