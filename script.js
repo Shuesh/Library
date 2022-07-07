@@ -11,6 +11,18 @@ let myLibrary = [
         author: 'God',
         pages: 2000,
         readStatus: 'Read'
+    },
+    {
+        title: 'Moby Dick',
+        author: 'Herman Melville',
+        pages: 500,
+        readStatus: 'Not read'
+    },
+    {
+        title: 'Atlas Shrugged',
+        author: 'Ayn Rand',
+        pages: 750,
+        readStatus: 'Read'
     }
 ];
 
@@ -68,7 +80,7 @@ function addBookToLibrary(title, author, pages, readStatus){
 
     // Apply class styling
     newEntry.classList.add('col-sm-3');
-    newEntry.classList.add('gx-5');
+    newEntry.classList.add('g-4');
     div.classList.add('book');
     cardContainer.appendChild(newEntry);
 
@@ -131,6 +143,7 @@ function appendAllBooks(){
     const cardContainer = document.getElementById("card-container");
 
     // Loop through each book in the library
+    for (let i = 0; i < 12; i++){
     myLibrary.forEach ((book) => {
         // Create container elements
         const newBook = document.createElement("li");
@@ -162,10 +175,10 @@ function appendAllBooks(){
 
         // Add classes for styling
         newBook.classList.add("col-sm-3");
-        newBook.classList.add("gx-5");
+        newBook.classList.add("g-4");
         div.classList.add("book");
         cardContainer.appendChild(newBook);
-    });
+    });}
 }
 
 
