@@ -1,27 +1,10 @@
 /* Bootstrap colors */
 
 :root {
-    --bs-blue: #0d6efd;
-    --bs-indigo: #6610f2;
-    --bs-purple: #6f42c1;
-    --bs-pink: #d63384;
-    --bs-red: #dc3545;
-    --bs-orange: #fd7e14;
-    --bs-yellow: #ffc107;
-    --bs-green: #198754;
-    --bs-teal: #20c997;
-    --bs-cyan: #0dcaf0;
-    --bs-white: #fff;
-    --bs-gray: #6c757d;
-    --bs-gray-dark: #343a40;
-    --bs-primary: #0d6efd;
-    --bs-secondary: #6c757d;
-    --bs-success: #198754;
-    --bs-info: #0dcaf0;
-    --bs-warning: #ffc107;
-    --bs-danger: #dc3545;
-    --bs-light: #f8f9fa;
-    --bs-dark: #212529;
+    --primary: #394f8a;
+    --secondary: #fdf5df;
+    --card: #583939;
+    --text: #fefefe;
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
@@ -42,15 +25,19 @@ html {
 }
 
 header {
-    background-color: var(--bs-primary);
+    background-color: var(--primary);
 }
 
 header h1 {
-    color: var(--bs-white);
+    color: var(--text);
     padding-top: 10px;
     padding-bottom: 15px;
     padding-left: 30px;
     font-size: 40px;
+}
+
+body {
+    background-color: var(--secondary);
 }
 
 .app-body {
@@ -68,8 +55,16 @@ ul {
     list-style-type: none;
 }
 
-li {
-    background-color: var(--bs-secondary);
+.book {
+    background-color: var(--card);
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr;
+    justify-items: center;
+    border-radius: 10px;
+}
+
+p {
+    color: var(--text);
 }
 
 
@@ -85,11 +80,11 @@ footer {
     width: 100%;
     padding-bottom: 10px;
     padding-top: 10px;
-    background-color: var(--bs-primary);
+    background-color: var(--primary);
 }
 
 footer label {
-    color: var(--bs-white);
+    color: var(--text);
 }
 
 

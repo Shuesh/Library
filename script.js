@@ -67,8 +67,9 @@ function addBookToLibrary(title, author, pages, readStatus){
     newEntry.appendChild(div);
 
     // Apply class styling
-    newEntry.classList.add('col-sm-6');
+    newEntry.classList.add('col-sm-3');
     newEntry.classList.add('gx-5');
+    div.classList.add('book');
     cardContainer.appendChild(newEntry);
 
     // Clear input fields
@@ -153,14 +154,16 @@ function appendAllBooks(){
         newReadStatus.classList.add("readStatus");
 
         // Append text elements to the card
-        newBook.appendChild(newTitle);
-        newBook.appendChild(newAuthor);
-        newBook.appendChild(newPages);
-        newBook.appendChild(newReadStatus);
+        div.appendChild(newTitle);
+        div.appendChild(newAuthor);
+        div.appendChild(newPages);
+        div.appendChild(newReadStatus);
+        newBook.appendChild(div);
 
         // Add classes for styling
-        newBook.classList.add("col-sm-6");
+        newBook.classList.add("col-sm-3");
         newBook.classList.add("gx-5");
+        div.classList.add("book");
         cardContainer.appendChild(newBook);
     });
 }
