@@ -57,19 +57,20 @@ function addBookToLibrary(title, author, pages, readStatus){
     // Create paragraph elements and text for each info
     const newTitle = document.createElement('p');
     newTitle.textContent = `${newBook.title}`;
-    newTitle.classList.add('title');
+    newTitle.classList.add('book-title');
 
     const newAuthor = document.createElement('p');
     newAuthor.textContent = `by ${newBook.author}`;
-    newAuthor.classList.add('author');
+    newAuthor.classList.add('book-author');
 
     const newPages = document.createElement('p');
     newPages.textContent = `${newBook.pages} pages`;
-    newPages.classList.add('pages');
+    newPages.classList.add('book-pages');
 
+    // Make into a button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     const newReadStatus = document.createElement('p');
     newReadStatus.textContent = `${newBook.readStatus}`;
-    newReadStatus.classList.add('readStatus');
+    newReadStatus.classList.add('book-readStatus');
 
     // Append what has been made
     div.appendChild(newTitle);
@@ -152,19 +153,20 @@ function appendAllBooks(){
         // Create paragraph elements and text for each info
         const newTitle = document.createElement('p');
         newTitle.textContent = `${book.title}`
-        newTitle.classList.add("title");
+        newTitle.classList.add("book-title");
 
         const newAuthor = document.createElement('p');
         newAuthor.textContent = `by ${book.author}`;
-        newAuthor.classList.add("author");
+        newAuthor.classList.add("book-author");
 
         const newPages = document.createElement('p');
         newPages.textContent = `${book.pages} pages`;
-        newPages.classList.add("pages");
+        newPages.classList.add("book-pages");
 
+        // Make into a button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         const newReadStatus = document.createElement('p');
         newReadStatus.textContent = `${book.readStatus}`;
-        newReadStatus.classList.add("readStatus");
+        newReadStatus.classList.add("book-readStatus");
 
         // Append text elements to the card
         div.appendChild(newTitle);

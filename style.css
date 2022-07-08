@@ -33,7 +33,6 @@ header h1 {
     padding-top: 10px;
     padding-bottom: 15px;
     padding-left: 30px;
-    font-size: 40px;
 }
 
 body {
@@ -51,6 +50,22 @@ body {
 }
 
 
+/* Scrollbar styling */
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--text);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #949494;
+    border-radius: 10px;
+}
+
 
 
 /* Book card styling */
@@ -61,16 +76,32 @@ ul {
 
 .book {
     background-color: var(--card);
-    display: grid;
-    grid-template: 1fr 1fr / 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     justify-items: center;
     border-radius: 10px;
 }
 
 p {
     color: var(--text);
+    text-align: center;
 }
 
+.book-title {
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+
+.book-author {
+    font-size: .85rem;
+}
+
+.book-readStatus {
+    background-color: green;
+}
+
+
+/* Read status and remove button styling */
 
 
 
