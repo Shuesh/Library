@@ -44,7 +44,7 @@ body {
     height: 100%;
 }
 
-.app-body {
+#app-body {
     max-height: calc(100vh - calc(73 + 140px));
     overflow-y: auto;
     width: 100%;

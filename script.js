@@ -49,7 +49,7 @@ function addBookToLibrary(title, author, pages, readStatus){
     const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
 
-    addBookToDOM(newBook);
+    updateAllBooks();
 
     // Clear input fields
     document.getElementById('title').value = '';
@@ -173,9 +173,17 @@ function verifyFields(){
 
 
 // Start by appending all books already present in the library
-function appendAllBooks(){
-    // Get the main container element
-    const cardContainer = document.getElementById("card-container");
+function updateAllBooks(){
+    // Remove everything
+    const cardBody = document.getElementById("app-body");
+    cardBody.removeChild(document.getElementById("card-container"));
+    
+    const cardContainer = document.createElement("ul");
+    cardContainer.classList.add("row");
+    cardContainer.id = "card-container";
+
+    cardBody.appendChild(cardContainer);
+
 
     // Loop through each book in the library
     myLibrary.forEach ((book) => {
@@ -205,14 +213,13 @@ function toggleReadStatus(){
         }
     });
 
+    updateAllBooks();
+
 }
 
 
 function removeBook(){
-    // console.log(`Remove ${this.parentElement.child[0].value}`);
     let parent = this.parentElement
-    // DOM
-    parent.parentElement.parentElement.removeChild(parent.parentElement);
 
     // myLibrary array
     for (let i = 0; i < myLibrary.length; i++){        
@@ -220,6 +227,8 @@ function removeBook(){
                 myLibrary.splice(i,1);
         }
     };
+
+    updateAllBooks();
 }
 
 
@@ -231,7 +240,7 @@ let addBookButton = document.getElementById('addBook');
 addBookButton.addEventListener("click", verifyFields);
 
 // On window load, append all books in the library
-window.onload = appendAllBooks;
+window.onload = updateAllBooks;
 
 // Add event listener to Read/Not read buttons
 function addReadStatusListener(button){
