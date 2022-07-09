@@ -193,23 +193,16 @@ function updateAllBooks(){
 
 
 function toggleReadStatus(){
-    // Toggle DOM readStatus
-    if (this.textContent === "Read"){
-        this.textContent = "Not Read";
-        this.classList.remove("read");
-        this.classList.add("unread");
-    }
-    else {
-        this.textContent = "Read";
-        this.classList.remove("unread");
-        this.classList.add("read");
-    }
-
     // Update library array
     let parent = this.parentElement
     myLibrary.forEach(book => {
         if (book.title == parent.children[0].textContent && ('by ' + book.author) == parent.children[1].textContent && (book.pages + ' pages') == parent.children[2].textContent){
-                book.readStatus = this.textContent;
+            if (book.readStatus == 'Read'){
+                book.readStatus = 'Not read';
+            }
+            else {
+                book.readStatus = 'Read';
+            }
         }
     });
 
