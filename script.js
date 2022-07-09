@@ -49,47 +49,58 @@ function addBookToLibrary(title, author, pages, readStatus){
     const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
 
-    // Get/make main containers
-    const cardContainer = document.getElementById('card-container');
-    const newEntry = document.createElement('li');
-    const div = document.createElement('div');
-
-    // Create paragraph elements and text for each info
-    const newTitle = document.createElement('p');
-    newTitle.textContent = `${newBook.title}`;
-    newTitle.classList.add('book-title');
-
-    const newAuthor = document.createElement('p');
-    newAuthor.textContent = `by ${newBook.author}`;
-    newAuthor.classList.add('book-author');
-
-    const newPages = document.createElement('p');
-    newPages.textContent = `${newBook.pages} pages`;
-    newPages.classList.add('book-pages');
-
-    // Make into a button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    const newReadStatus = document.createElement('p');
-    newReadStatus.textContent = `${newBook.readStatus}`;
-    newReadStatus.classList.add('book-readStatus');
-
-    // Append what has been made
-    div.appendChild(newTitle);
-    div.appendChild(newAuthor);
-    div.appendChild(newPages);
-    div.appendChild(newReadStatus);
-    newEntry.appendChild(div);
-
-    // Apply class styling
-    newEntry.classList.add('col-sm-3');
-    newEntry.classList.add('g-4');
-    div.classList.add('book');
-    cardContainer.appendChild(newEntry);
+    addBookToDOM(newBook)
 
     // Clear input fields
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('pages').value = '';
     document.getElementById('readStatus').checked = false;
+}
+
+
+function addBookToDOM (book){
+        // Get/make main containers
+        const cardContainer = document.getElementById('card-container');
+        const newEntry = document.createElement('li');
+        const div = document.createElement('div');
+    
+        // Create paragraph elements and text for each info
+        const newTitle = document.createElement('p');
+        newTitle.textContent = `${book.title}`;
+        newTitle.classList.add('book-title');
+    
+        const newAuthor = document.createElement('p');
+        newAuthor.textContent = `by ${book.author}`;
+        newAuthor.classList.add('book-author');
+    
+        const newPages = document.createElement('p');
+        newPages.textContent = `${book.pages} pages`;
+        newPages.classList.add('book-pages');
+    
+        // Make into a button
+        const newReadStatus = document.createElement('button');
+        newReadStatus.textContent = `${book.readStatus}`;
+        newReadStatus.classList.add('book-readStatus');
+        if(book.readStatus == 'Read'){
+            newReadStatus.classList.add('read');
+        }
+        else {
+            newReadStatus.classList.add('unread');
+        }
+    
+        // Append what has been made
+        div.appendChild(newTitle);
+        div.appendChild(newAuthor);
+        div.appendChild(newPages);
+        div.appendChild(newReadStatus);
+        newEntry.appendChild(div);
+    
+        // Apply class styling
+        newEntry.classList.add('col-sm-3');
+        newEntry.classList.add('g-4');
+        div.classList.add('book');
+        cardContainer.appendChild(newEntry);
 }
 
 
@@ -146,40 +157,7 @@ function appendAllBooks(){
     // Loop through each book in the library
     for (let i = 0; i < 12; i++){
     myLibrary.forEach ((book) => {
-        // Create container elements
-        const newBook = document.createElement("li");
-        const div = document.createElement('div');
-
-        // Create paragraph elements and text for each info
-        const newTitle = document.createElement('p');
-        newTitle.textContent = `${book.title}`
-        newTitle.classList.add("book-title");
-
-        const newAuthor = document.createElement('p');
-        newAuthor.textContent = `by ${book.author}`;
-        newAuthor.classList.add("book-author");
-
-        const newPages = document.createElement('p');
-        newPages.textContent = `${book.pages} pages`;
-        newPages.classList.add("book-pages");
-
-        // Make into a button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        const newReadStatus = document.createElement('p');
-        newReadStatus.textContent = `${book.readStatus}`;
-        newReadStatus.classList.add("book-readStatus");
-
-        // Append text elements to the card
-        div.appendChild(newTitle);
-        div.appendChild(newAuthor);
-        div.appendChild(newPages);
-        div.appendChild(newReadStatus);
-        newBook.appendChild(div);
-
-        // Add classes for styling
-        newBook.classList.add("col-sm-3");
-        newBook.classList.add("g-4");
-        div.classList.add("book");
-        cardContainer.appendChild(newBook);
+        addBookToDOM(book);
     });}
 }
 
