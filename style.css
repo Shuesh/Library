@@ -102,7 +102,7 @@ p {
 .book-readStatus {
     color: var(--text);
     border: none;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     width: 100%;
 }
 
@@ -112,6 +112,12 @@ p {
 
 .unread {
     background-color: var(--unread);
+}
+
+.removeButton {
+    /* background-color: transparent; */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 
@@ -194,16 +200,12 @@ footer label {
 /* Error checking -- highlights boxes with missing information*/
 
 .missing-info {
+    box-sizing: border-box;
     border: 2px solid red;
     position: relative;
     animation: shake 0.1s;
     animation-iteration-count: 2;
     outline: none;
-}
-
-.missing-info::after {
-    content: "<- Missing/Invalid Info";
-    color: red;
 }
 
 @keyframes shake {

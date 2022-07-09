@@ -49,7 +49,7 @@ function addBookToLibrary(title, author, pages, readStatus){
     const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
 
-    addBookToDOM(newBook)
+    addBookToDOM(newBook);
 
     // Clear input fields
     document.getElementById('title').value = '';
@@ -78,7 +78,7 @@ function addBookToDOM (book){
         newPages.textContent = `${book.pages} pages`;
         newPages.classList.add('book-pages');
     
-        // Make into a button
+        // Read Status toggle button
         const newReadStatus = document.createElement('button');
         newReadStatus.textContent = `${book.readStatus}`;
         newReadStatus.classList.add('book-readStatus');
@@ -88,12 +88,17 @@ function addBookToDOM (book){
         else {
             newReadStatus.classList.add('unread');
         }
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('removeButton');
     
         // Append what has been made
         div.appendChild(newTitle);
         div.appendChild(newAuthor);
         div.appendChild(newPages);
         div.appendChild(newReadStatus);
+        div.appendChild(removeButton);
         newEntry.appendChild(div);
     
         // Apply class styling
@@ -101,6 +106,9 @@ function addBookToDOM (book){
         newEntry.classList.add('g-4');
         div.classList.add('book');
         cardContainer.appendChild(newEntry);
+
+        addReadStatusListener(newReadStatus);
+        addRemoveListener(removeButton);
 }
 
 
@@ -141,6 +149,21 @@ function verifyFields(){
         pages.classList.remove("missing-info");
     }
 
+    // Check if the book already exists in the library
+    // .every() goes until it receives a false value, then quits the loop
+
+    myLibrary.every(book => {
+        if (title.value.toLowerCase() === book.title.toLowerCase() && author.value.toLowerCase() === book.author.toLowerCase() && Number(pages.value) === book.pages){
+            errorFlag = true;
+            title.classList.add("missing-info");
+            author.classList.add("missing-info");
+            pages.classList.add("missing-info");
+            return false;
+        }
+
+        return true;
+    });
+
     // If no errors from the above, add the book to our library
     if (!errorFlag){
         addBookToLibrary(title.value, author.value, pages.value, readStatus);
@@ -155,12 +178,53 @@ function appendAllBooks(){
     const cardContainer = document.getElementById("card-container");
 
     // Loop through each book in the library
-    for (let i = 0; i < 12; i++){
     myLibrary.forEach ((book) => {
         addBookToDOM(book);
-    });}
+    });
 }
 
+
+function toggleReadStatus(){
+    // Toggle DOM readStatus
+    if (this.textContent === "Read"){
+        this.textContent = "Not Read";
+        this.classList.remove("read");
+        this.classList.add("unread");
+    }
+    else {
+        this.textContent = "Read";
+        this.classList.remove("unread");
+        this.classList.add("read");
+    }
+
+    // Update library array
+    let parent = this.parentElement
+    myLibrary.forEach(book => {
+        if (book.title == parent.children[0].textContent && ('by ' + book.author) == parent.children[1].textContent && (book.pages + ' pages') == parent.children[2].textContent){
+                book.readStatus = this.textContent;
+        }
+    });
+
+}
+
+
+function removeBook(){
+    // console.log(`Remove ${this.parentElement.child[0].value}`);
+    let parent = this.parentElement
+    // DOM
+    parent.parentElement.parentElement.removeChild(parent.parentElement);
+
+    // myLibrary array
+    for (let i = 0; i < myLibrary.length; i++){        
+        if (myLibrary[i].title == parent.children[0].textContent && ('by ' + myLibrary[i].author) == parent.children[1].textContent && (myLibrary[i].pages + ' pages') == parent.children[2].textContent){
+                myLibrary.splice(i,1);
+        }
+    };
+}
+
+
+
+// ~~~~~Event Listeners~~~~~
 
 // Add event listener to the "Add Book" button in the footer
 let addBookButton = document.getElementById('addBook');
@@ -168,3 +232,13 @@ addBookButton.addEventListener("click", verifyFields);
 
 // On window load, append all books in the library
 window.onload = appendAllBooks;
+
+// Add event listener to Read/Not read buttons
+function addReadStatusListener(button){
+    button.addEventListener("click", toggleReadStatus);
+}
+
+// Add event listener to Remove buttons
+function addRemoveListener(button){
+    button.addEventListener("click", removeBook);
+}
